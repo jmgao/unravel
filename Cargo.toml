@@ -1,0 +1,10 @@
+[package]
+name = "unravel"
+version = "0.0.0"
+authors = ["Josh Gao <josh@insolit.us>"]
+description = "Rust-based stack unwinder"
+license = "Apache-2.0"
+
+[dependencies]
+byteorder = "0.5"
+elf = "0.0.6"
