@@ -1,0 +1,3 @@
+[submodule "rust-elf"]
+	path = vendor/rust-elf
+	url = https://github.com/jmgao/rust-elf.git
