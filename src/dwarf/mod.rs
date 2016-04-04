@@ -1,3 +1,4 @@
+pub mod cfa;
 pub mod cfi;
 mod reader;
 mod parser;

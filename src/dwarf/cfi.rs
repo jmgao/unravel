@@ -2,6 +2,7 @@ use std::fmt;
 use std::io;
 use std::io::Read;
 use std::str;
+use dwarf::cfa::CFA;
 use dwarf::reader::DwarfReader;
 
 struct Register(u64);
@@ -61,7 +62,7 @@ pub struct CommonInfo {
     pub code_alignment_factor: u64,
     pub data_alignment_factor: i64,
     pub return_address_register: u64,
-    pub initial_instructions: Vec<u8>,
+    pub initial_instructions: Vec<CFA>,
 }
 
 impl fmt::Display for CommonInfo {

@@ -3,6 +3,7 @@ use std::io;
 use std::io::ErrorKind;
 use std::io::Read;
 use std::str;
+use dwarf::cfa::CFA;
 use dwarf::cfi::*;
 use dwarf::reader::DwarfReader;
 
@@ -74,16 +75,24 @@ fn read_common_info<R: io::BufRead>(reader: &mut DwarfReader<R>,
         }
 
         let augmentation_data_length = try!(reader.read_uleb128());
-        let mut data = Vec::with_capacity(augmentation_data_length as usize);
+        let mut data = Vec::new();
+        data.resize(augmentation_data_length as usize, 0);
         try!(reader.read_exact(data.as_mut_slice()));
-        println!("read {} bytes", augmentation_data_length);
         data
     } else {
         Vec::new()
     };
 
     let mut initial_instructions = Vec::new();
-    try!(reader.read_to_end(&mut initial_instructions));
+    loop {
+        match try!(CFA::read_instruction(reader)) {
+            Some(cfa) => {
+                println!("{:?}", cfa);
+                initial_instructions.push(cfa)
+            }
+            None => break,
+        }
+    }
 
     Ok(CommonInfo {
         header: header,
