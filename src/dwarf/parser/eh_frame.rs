@@ -1,4 +1,3 @@
-use std::fmt;
 use std::io;
 use std::io::ErrorKind;
 use std::io::Read;
@@ -23,7 +22,7 @@ pub fn read_cfi_entry(reader: &mut io::BufRead) -> io::Result<CFIEntry> {
 
     // Constrain the reader.
     let mut reader = reader.take(length);
-    let mut entry_id: u64;
+    let entry_id: u64;
     if is_64bit {
         entry_id = try!(reader.read_u64());
     } else {

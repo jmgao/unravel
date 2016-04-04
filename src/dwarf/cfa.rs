@@ -3,6 +3,7 @@ use std::io;
 use std::io::ErrorKind;
 
 #[derive(Debug)]
+#[allow(non_camel_case_types)]
 pub enum CFA {
     DW_CFA_advance_loc {
         delta: u32,

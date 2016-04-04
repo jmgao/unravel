@@ -1,6 +1,4 @@
 use std::io;
-use std::io::Error;
-use std::io::ErrorKind;
 use std::io::Take;
 use std::mem;
 use std::slice;

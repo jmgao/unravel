@@ -1,9 +1,7 @@
 use std::io::Cursor;
 use std::env;
 use std::path::Path;
-use std::str::FromStr;
 
-extern crate core;
 extern crate elf;
 extern crate unravel;
 
