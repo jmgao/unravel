@@ -25,12 +25,14 @@ pub fn main() {
                  eh_frame.data.len());
 
         let mut cursor = Cursor::new(eh_frame.data.as_slice());
-        match unravel::dwarf::cfi::CFIEntry::from_bytes(&mut cursor) {
-            Ok(cfi_entry) => {
-                println!("Found CFI entry:");
-                println!("{}", cfi_entry);
+        loop {
+            match unravel::dwarf::eh_frame::read_cfi_entry(&mut cursor) {
+                Ok(cfi_entry) => {
+                    println!("Found CFI entry:");
+                    println!("{}", cfi_entry);
+                }
+                Err(err) => panic!("Failed to read CFI entry: {}", err),
             }
-            Err(err) => panic!("Failed to read CFI entry: {}", err),
         }
     } else {
         println!("Usage: {} <path>", env::args().nth(0).unwrap())
